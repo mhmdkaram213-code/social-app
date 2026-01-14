@@ -4,7 +4,8 @@ import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import uploadProfilePhoto from "../services/uploadProfilePhoto"
 export default function Profile() {
-  const { userData, setUserData } = useContext(AuthContext)
+  // eslint-disable-next-line no-unused-vars
+  const { userData, setUserData , getUser } = useContext(AuthContext)
   const navigate = useNavigate()
   const [preview, setPreview] = useState(userData?.photo)
   async function handleImg(e) {
@@ -12,12 +13,10 @@ export default function Profile() {
     if (!file) return
     setPreview(URL.createObjectURL(file))
     const formData = new FormData()
-    formData.append("image", file)
+    formData.append("photo", file)
     const response = await uploadProfilePhoto(formData)
     if (response?.message === "success") {
-      setUserData(prev => ({
-        ...prev, photo: response.user.photo + `?t=${Date.now()}`,
-      }))
+      getUser()
     }
   }
   return (
