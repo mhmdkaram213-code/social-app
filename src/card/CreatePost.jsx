@@ -1,5 +1,6 @@
 import { Button } from '@heroui/react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import createMyPost from '../services/createPostApi'
 export default function CreatePost({ callback }) {
     const [postBody, setPostBody] = useState('')
@@ -9,6 +10,7 @@ export default function CreatePost({ callback }) {
     async function addPost(e) {
         e.preventDefault()
         setIsLoading(true)
+        toast.success('Successfully posted!' , {duration: 4000})
         const formData = new FormData()
         formData.append('body', postBody ?? '')
         if (image) {

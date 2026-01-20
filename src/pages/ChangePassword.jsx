@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { changePassword } from "../services/changePassword"
+import toast from "react-hot-toast"
 export default function ChangePassword() {
     const [password, setPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
@@ -9,7 +10,9 @@ export default function ChangePassword() {
         try {
             setLoading(true)
             await changePassword(password, newPassword)
-            alert("Password changed successfully ✅")
+            toast.success('Successfully Changed Password', { duration: 4000 })
+            setPassword("")
+            setNewPassword("")
         } catch (err) {
             console.error(err)
             alert(err.response?.data?.message || "Error")
@@ -25,7 +28,7 @@ export default function ChangePassword() {
 
                 <input type="password" placeholder="New password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
                     className="w-full border border-gray-600 p-2 rounded" />
-                    
+
                 <button disabled={loading} className="w-full bg-blue-600 text-white py-2 rounded">
                     {loading ? "Changing..." : "Change Password"}
                 </button>

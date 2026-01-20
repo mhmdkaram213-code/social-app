@@ -5,6 +5,7 @@ import createMyComment from '../services/createComment.js'
 import { useContext, useState } from 'react'
 import PostDropDown from '../component/DropDown/PostDropDown.jsx'
 import { AuthContext } from '../context/AuthContext.jsx'
+import toast from 'react-hot-toast'
 export default function PostCard({ post, allComment, callback }) {
     const {userData} = useContext(AuthContext)
     const [commentContent, setCommentContent] = useState('')
@@ -12,6 +13,7 @@ export default function PostCard({ post, allComment, callback }) {
     async function createComment(e) {
         e.preventDefault()
         setIsLoading(true)
+        toast.success('Successfully commented!' , {duration: 4000})
         const response = await createMyComment(commentContent, post._id)
         if (response.message == 'success') {
             await callback()

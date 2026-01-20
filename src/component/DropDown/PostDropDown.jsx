@@ -10,7 +10,8 @@ import {
 import updateMyPost from "../../services/updatePost";
 import { useState } from "react";
 import deleteMyPost from "../../services/deletePostApi";
-export default function PostDropDown({ callback , postId}) {
+import toast from "react-hot-toast";
+export default function PostDropDown({ callback, postId }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [postBody, setPostBody] = useState('')
   const [image, setImage] = useState('')
@@ -19,12 +20,13 @@ export default function PostDropDown({ callback , postId}) {
   async function addPost(e) {
     e.preventDefault()
     setIsLoading(true)
+    toast.success('Successfully Updated Post', { duration: 4000 })
     const formData = new FormData()
     formData.append('body', postBody ?? '')
     if (image) {
       formData.append('image', image)
     }
-    const response = await updateMyPost(formData)
+    const response = await updateMyPost(formData , postId)
     if (response.message == 'success') {
       await callback()
       setPostBody('')
@@ -39,13 +41,14 @@ export default function PostDropDown({ callback , postId}) {
     e.target.value = ''
   }
   async function deletePost() {
-      setIsLoading(true)
-      const response = await deleteMyPost(postId)
-      if (response.message == 'success') {
-        await callback()
-      }
-      setIsLoading(false)
+    setIsLoading(true)
+    toast.success('Successfully Deleted Post', { duration: 4000 })
+    const response = await deleteMyPost(postId)
+    if (response.message == 'success') {
+      await callback()
     }
+    setIsLoading(false)
+  }
   return (
     <>
       <Dropdown>

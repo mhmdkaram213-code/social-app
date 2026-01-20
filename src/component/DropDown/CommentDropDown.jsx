@@ -10,12 +10,14 @@ import {
 import deleteMyComment from "../../services/deleteComment";
 import { useState } from "react";
 import updateMyComment from "../../services/updateCommentApi";
+import toast from "react-hot-toast";
 export default function CommentDropDown({ id, callback }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [commentContent, setCommentContent] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   async function deleteComment() {
     setIsLoading(true)
+    toast.success('Successfully Deleted Comment', { duration: 4000 })
     const response = await deleteMyComment(id)
     if (response.message == 'success') {
       await callback()
@@ -23,14 +25,15 @@ export default function CommentDropDown({ id, callback }) {
     setIsLoading(false)
   }
   async function updateComment(e) {
-          e.preventDefault()
-          setIsLoading(true)
-          const response = await updateMyComment(commentContent , id)
-          if (response.message == 'success') {
-              await callback()
-          }
-          setIsLoading(false)
-      }
+    e.preventDefault()
+    setIsLoading(true)
+    toast.success('Successfully Updated Comment', { duration: 4000 })
+    const response = await updateMyComment(commentContent, id)
+    if (response.message == 'success') {
+      await callback()
+    }
+    setIsLoading(false)
+  }
   return (
     <>
       <Dropdown>

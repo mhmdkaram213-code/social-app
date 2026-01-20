@@ -3,17 +3,18 @@ import getSinglePost from "../services/singlePostApi.js"
 import { useEffect, useState } from "react"
 import PostCard from '../card/PostCard.jsx'
 import LoadingPage from "../component/LoadingPage/LoadingPage.jsx";
+import { Helmet } from "react-helmet";
 export default function SinglePost() {
     const [postDetails, setPostDetails] = useState(null)
     const { id } = useParams()
     async function getPostDetails() {
-    const response = await getSinglePost(id)
-    console.log("Single Post Response:", response)
+        const response = await getSinglePost(id)
+        console.log("Single Post Response:", response)
 
-    if (response?.message === 'success') {
-        setPostDetails(response.post)
+        if (response?.message === 'success') {
+            setPostDetails(response.post)
+        }
     }
-}
     useEffect(() => {
         getPostDetails()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,6 +22,10 @@ export default function SinglePost() {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Single Post Page</title>
+            </Helmet>
             {postDetails ? <PostCard callback={getPostDetails} allComment={true} post={postDetails} /> : <LoadingPage />}
         </>
     )

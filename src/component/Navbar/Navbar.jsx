@@ -13,11 +13,15 @@ import {
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
+import { useNetworkState } from "react-use";
 export default function Navbar() {
   const { userToken, setUserToken, userData, setUserData } = useContext(AuthContext)
+  const { online } = useNetworkState()
   const navigate = useNavigate()
   function logOut() {
     localStorage.removeItem('token')
+    toast.success('Successfully Logout', { duration: 4000 })
     setUserToken(null)
     setUserData(null)
     navigate('/')
@@ -35,14 +39,16 @@ export default function Navbar() {
           <NavbarContent as="div" justify="end">
             <Dropdown placement="bottom-end">
               <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as="button"
-                  className="transition-transform"
-                  color="secondary"
-                  size="sm"
-                  src={userData?.photo}
-                />
+                <div className="relative cursor-pointer">
+                  <Avatar
+                    isBordered
+                    as="button"
+                    className="transition-transform"
+                    color="secondary"
+                    size="sm"
+                    src={userData?.photo} />
+                  <span className={`absolute -bottom-2 -right-1 w-4 h-4 rounded-full border-2 border-white ${online ? "bg-green-500" : "bg-red-500"}`} />
+                </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem key="profile" onPress={() => navigate("/profile")}>
