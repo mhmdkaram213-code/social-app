@@ -6,7 +6,7 @@ import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Register from "./auth/Register/Register";
-import ProtectRoute from "./pages/protectRoute";
+import ProtectRoute from "./pages/ProtectRoute";
 import MyPosts from "./pages/MyPosts";
 import MyComments from "./pages/MyComments";
 import ChangePassword from "./pages/ChangePassword";
