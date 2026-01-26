@@ -3,8 +3,6 @@ import PostCard from '../card/PostCard.jsx'
 import getAllPosts from '../services/allPostsApi'
 import LoadingPage from '../component/LoadingPage/LoadingPage'
 import CreatePost from '../card/CreatePost.jsx'
-import { Helmet } from 'react-helmet'
-
 export default function Home() {
   const [allPosts, setAllPosts] = useState([])
   async function getPosts() {
@@ -20,10 +18,6 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Home Page</title>
-      </Helmet>
       <div className='bg-gray-200'>
         <CreatePost callback={getPosts} />
         {allPosts.length === 0 ? <LoadingPage /> : allPosts.map((post) => <PostCard key={post._id} callback={getPosts} allComment={false} post={post} />)}

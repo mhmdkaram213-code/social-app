@@ -6,7 +6,6 @@ import SignUp from "../../services/registerApi";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Helmet } from "react-helmet";
 export default function Register() {
   const navigate = useNavigate()
   const [apiError, setApiError] = useState(null)
@@ -38,10 +37,6 @@ export default function Register() {
   }
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Register Page</title>
-      </Helmet>
       <div className="bg-gray-300 min-h-screen flex justify-center items-center text-center">
         <div className="md:w-1/3 w-full mx-5 md:mx-0 m-auto p-5 bg-white shadow rounded-2xl my-5">
           <h2 className="text-2xl font-bold text-sky-700 my-4 ">Register Now</h2>

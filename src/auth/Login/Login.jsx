@@ -7,8 +7,6 @@ import { loginSchema } from "../../Schema/loginSchema";
 import SignIn from "../../services/loginApi";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-import { Helmet } from "react-helmet";
-
 export default function Login() {
   const { setUserToken } = useContext(AuthContext)
   const navigate = useNavigate()
@@ -39,10 +37,6 @@ export default function Login() {
   }
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Login Page</title>
-      </Helmet>
       <div className="bg-gray-300 min-h-screen flex justify-center items-center text-center">
         <div className="md:w-1/3 w-full mx-5 md:mx-0 m-auto p-5 bg-white shadow rounded-2xl">
           <h2 className="text-2xl font-bold text-sky-700 my-4 ">Login Now</h2>

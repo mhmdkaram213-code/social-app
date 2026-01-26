@@ -4,7 +4,6 @@ import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import uploadProfilePhoto from "../services/uploadProfilePhoto"
 import toast from "react-hot-toast"
-import { Helmet } from "react-helmet"
 export default function Profile() {
   // eslint-disable-next-line no-unused-vars
   const { userData, setUserData, getUser } = useContext(AuthContext)
@@ -24,10 +23,6 @@ export default function Profile() {
   }
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Profile Page</title>
-      </Helmet>
       <div className="min-h-screen bg-gray-300 flex items-center justify-center">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 text-center">
 

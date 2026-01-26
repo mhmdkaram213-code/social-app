@@ -3,7 +3,6 @@ import getSinglePost from "../services/singlePostApi.js"
 import { useEffect, useState } from "react"
 import PostCard from '../card/PostCard.jsx'
 import LoadingPage from "../component/LoadingPage/LoadingPage.jsx";
-import { Helmet } from "react-helmet";
 export default function SinglePost() {
     const [postDetails, setPostDetails] = useState(null)
     const { id } = useParams()
@@ -22,10 +21,6 @@ export default function SinglePost() {
 
     return (
         <>
-            <Helmet>
-                <meta charSet="utf-8" />
-                <title>Single Post Page</title>
-            </Helmet>
             {postDetails ? <PostCard callback={getPostDetails} allComment={true} post={postDetails} /> : <LoadingPage />}
         </>
     )
